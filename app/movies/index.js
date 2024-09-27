@@ -8,17 +8,27 @@ import { MOVIE } from "../../constants/paths";
 import { sortMoviesByYearAndTitle } from "../../utils/sortMoviesByYearAndTitle";
 
 const Movies = () => {
-  const { movies } = useContext(MoviesContext);
+  const { movies, loading, error } = useContext(MoviesContext);
   const sortedMovies = sortMoviesByYearAndTitle(movies);
 
   return (
     <View style={styles.movies}>
       <ScrollView contentContainerStyle={styles.list}>
-        {sortedMovies.map(movie => (
-          <Link href={`${MOVIE(movie._id)}`} key={movie._id} style={styles.listItem}>
-            <MovieCard title={movie.title} releaseYear={movie.releaseYear} poster={movie.poster} />
-          </Link>
-        ))}
+        {loading ? (
+          <Text style={styles.loading}>Loading...</Text>
+        ) : error ? (
+          <Text style={styles.error}>{error}</Text>
+        ) : (
+          sortedMovies.map(movie => (
+            <Link href={`${MOVIE(movie._id)}`} key={movie._id} style={styles.listItem}>
+              <MovieCard
+                title={movie.title}
+                releaseYear={movie.releaseYear}
+                poster={movie.poster}
+              />
+            </Link>
+          ))
+        )}
       </ScrollView>
     </View>
   );

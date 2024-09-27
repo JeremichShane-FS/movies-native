@@ -2,7 +2,6 @@ import { Link, useRouter } from "expo-router";
 import { useContext } from "react";
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ADD_MOVIE, MOVIE, MOVIES, ROOT } from "../constants/paths";
-import { API_BASE } from "../constants/urls";
 import { MoviesContext } from "../context/MoviesContext";
 import { sortMoviesByYearAndTitle } from "../utils/sortMoviesByYearAndTitle";
 
